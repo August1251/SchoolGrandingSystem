@@ -34,14 +34,14 @@ public class AuthController {
 	}
 	
 	@GetMapping("/register")
-	public String register_page(Model model) {
+	public String registerPage(Model model) {
 		model.addAttribute("user", new UserEntity());
 		
 		return "register";
 	}
 	
 	@PostMapping("/register")
-	public String register_control(@ModelAttribute("user") UserEntity user) {
+	public String registerControl(@ModelAttribute("user") UserEntity user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		
 		authService.saveRegisteredUser(user);
