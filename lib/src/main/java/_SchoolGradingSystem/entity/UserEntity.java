@@ -17,6 +17,11 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "users")
@@ -27,14 +32,22 @@ public class UserEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
 	private long id;
 	
+	@NotEmpty(message = "Username is empty")
+	@Pattern(regexp = "[a-zA-Z0-9]+", message = "Invalid value")
 	private String username;
 	
+	@NotEmpty(message = "Password is empty")
+	@Max(value = 16, message = "Max password size is 16")
+	@Min(value = 8, message = "Min password size is 8")
 	private String password;
 	
+	@NotEmpty(message = "First Name is empty")
 	private String firstName;
 	
+	@NotEmpty(message = "Surname is empty")
 	private String surname;
 	
+	@NotNull(message = "Birthday dates is empty")
 	private LocalDate birthdayDate;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

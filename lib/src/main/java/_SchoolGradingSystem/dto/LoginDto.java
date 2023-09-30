@@ -1,9 +1,14 @@
 package _SchoolGradingSystem.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+
 public class LoginDto {
 
+	@NotBlank(message = "username empty")
 	private String username;
 	
+	@NotBlank(message = "password empty")
 	private String password;
 
 	public LoginDto() {}

@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import _SchoolGradingSystem.dto.LoginDto;
 import _SchoolGradingSystem.entity.UserEntity;
 import _SchoolGradingSystem.service.AuthService;
+import jakarta.validation.Valid;
 
 @Controller
 public class AuthController {
@@ -41,11 +43,12 @@ public class AuthController {
 	}
 	
 	@PostMapping("/register")
-	public String registerControl(@ModelAttribute("user") UserEntity user) {
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
+	public String registerControl(@Valid @ModelAttribute("user") UserEntity user, BindingResult br) {
+		if (!br.hasErrors()) {
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
 		
-		authService.saveRegisteredUser(user);
-		
+			authService.saveRegisteredUser(user);
+		}
 		return "register";
 	}
 	
@@ -57,12 +60,14 @@ public class AuthController {
 	}
 	
 	@PostMapping("/login")
-	public String loginControl(@ModelAttribute("login") LoginDto login) {
-		Authentication authentication = new UsernamePasswordAuthenticationToken(
-				login.getUsername(),
-				login.getPassword());
+	public String loginControl(@Valid @ModelAttribute("login") LoginDto login, BindingResult br) {
+		if (!br.hasErrors()) {
+			Authentication authentication = new UsernamePasswordAuthenticationToken(
+					login.getUsername(),
+					login.getPassword());
 		
-		SecurityContextHolder.getContext().setAuthentication(authentication);
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+		}
 		
 		return "login";
 	}

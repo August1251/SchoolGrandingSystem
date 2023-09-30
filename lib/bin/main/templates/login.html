@@ -6,11 +6,13 @@
 </head>
 <body>
 	
-	<form th:method="POST" th:action="@{/login}"/>
+	<form id="login-form" th:method="POST" th:action="@{/login}"/>
 
 	<div th:object="${login}">
-		<input type="text" th:field="*{username}" placeholder="Username:"/>
-		<input type="password" th:field="*{password}" placeholder="Password:"/>
+		<p th:errors="*{username}">Username error</p><br>
+		<input type="text" th:field="*{username}" placeholder="Username:" form="login-form"/>
+		<p th:errors="*{password}">Password error</p><br>
+		<input type="password" th:field="*{password}" placeholder="Password:" form="login-form"/>
 		<button type="submit">Log In</button>
 	</div>
 </body>
