@@ -9,17 +9,17 @@
 	<form id="register-form" th:method="POST" th:action="@{/register}"/>
 	
 	<div th:object="${user}">
-		<input type="text" th:field="*{firstName}" placeholder="First Name:" form="register-form">
 			<p th:errors="${user.firstName}"></p><br>
-		<input type="text" th:field="*{surname}" placeholder="Surame:" form="register-form">
+		<input type="text" th:field="*{firstName}" placeholder="First Name:" form="register-form">
 			<p th:errors="${user.surname}"></p><br>
-		<input type="text" th:field="*{username}" placeholder="Username:" form="register-form">
+		<input type="text" th:field="*{surname}" placeholder="Surame:" form="register-form">
 			<p th:errors="${user.username}"></p><br>
-		<input type="password" th:field="*{password}" placeholder="Password:" form="register-form">
+		<input type="text" th:field="*{username}" placeholder="Username:" form="register-form">
 			<p th:errors="${user.password}"></p><br>
-		<input type="date" th:field="*{birthdayDate}" placeholder="Your birthday:" form="register-form">
+		<input type="password" th:field="*{password}" placeholder="Password:" form="register-form">
 			<p th:errors="${user.birthdayDate}"></p><br>
-		<button type="submit" form="register-form">Register</button>
+		<input type="date" th:field="*{birthdayDate}" placeholder="Your birthday:" form="register-form">
+			<button type="submit" form="register-form">Register</button>
 	</div>
 	
 </body>

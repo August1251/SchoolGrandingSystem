@@ -24,8 +24,8 @@ public class SecurityConfig {
 			.cors((cors) -> cors
 					.disable())
 				.authorizeHttpRequests((authz) -> authz
-						.requestMatchers("/register", "/login").permitAll()
-						.anyRequest().authenticated())
+						.requestMatchers("/register", "/login", "css/**", "js/**").permitAll()
+						.anyRequest().permitAll())
 				.formLogin((form) -> {
 					form.loginPage("/login").permitAll();
 					form.defaultSuccessUrl("/home");

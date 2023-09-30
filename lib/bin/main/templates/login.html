@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/login.css}" type="text/css"/>
 <title>Insert title here</title>
 </head>
 <body>
@@ -10,10 +11,10 @@
 
 	<div th:object="${login}">
 		<p th:errors="*{username}">Username error</p><br>
-		<input type="text" th:field="*{username}" placeholder="Username:" form="login-form"/>
+		<input class="login-input" type="text" th:field="*{username}" placeholder="Username:" form="login-form"/>
 		<p th:errors="*{password}">Password error</p><br>
-		<input type="password" th:field="*{password}" placeholder="Password:" form="login-form"/>
-		<button type="submit">Log In</button>
+		<input class="login-input" type="password" th:field="*{password}" placeholder="Password:" form="login-form"/><br>
+		<button class="login-button" type="submit">Log In</button>
 	</div>
 </body>
 </html>
