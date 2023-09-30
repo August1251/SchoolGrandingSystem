@@ -48,12 +48,17 @@ public class UserEntity {
 
 	public UserEntity() {}
 
-	public UserEntity(String firstName, String surname, LocalDate birthdayDate, int age) {
+	public UserEntity(
+			String username,
+			String password,
+			String firstName,
+			String surname,
+			LocalDate birthdayDate) {
+		this.username = username;
+		this.password = password;
 		this.firstName = firstName;
 		this.surname = surname;
-		this.birthdayDate = birthdayDate;
-		this.age = age;
-	}
+		this.birthdayDate = birthdayDate;	}
 
 	public long getId() {
 		return id;
