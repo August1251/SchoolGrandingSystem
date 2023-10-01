@@ -1,11 +1,14 @@
 package _SchoolGradingSystem;
 
+import org.junit.platform.suite.api.SelectClasses;
 import org.junit.platform.suite.api.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import org.springframework.test.context.TestPropertySource;
+
+import _SchoolGradingSystem.repository.UserRepositoryTest;
 
 @Suite
-@SuiteClasses({
-	
+@SelectClasses({
+	UserRepositoryTest.class
 })
 public class MainTest {
 

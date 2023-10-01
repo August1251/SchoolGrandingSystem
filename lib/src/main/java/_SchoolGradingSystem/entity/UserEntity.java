@@ -17,11 +17,10 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -37,8 +36,7 @@ public class UserEntity {
 	private String username;
 	
 	@NotEmpty(message = "Password is empty")
-	@Max(value = 16, message = "Max password size is 16")
-	@Min(value = 8, message = "Min password size is 8")
+	@Size(min = 8, max = 32, message = "Min size 8 max size 32")
 	private String password;
 	
 	@NotEmpty(message = "First Name is empty")
@@ -71,7 +69,8 @@ public class UserEntity {
 		this.password = password;
 		this.firstName = firstName;
 		this.surname = surname;
-		this.birthdayDate = birthdayDate;	}
+		this.birthdayDate = birthdayDate;
+	}
 
 	public long getId() {
 		return id;

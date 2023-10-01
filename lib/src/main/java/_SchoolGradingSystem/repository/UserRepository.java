@@ -11,5 +11,6 @@ import _SchoolGradingSystem.entity.UserEntity;
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 	
 	Optional<UserEntity> findUserByUsername(String username);
+	UserEntity findByUsername(String username);
 	
 }
