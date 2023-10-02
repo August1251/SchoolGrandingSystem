@@ -34,13 +34,13 @@ public class UserRepositoryTest {
 	@Test
 	@DisplayName("User Repository Test #1")
 	public void saveRepository_shouldSaveRepositoryToDB_ReturnSavedUser() {
-		UserEntity userEquals = new UserEntity("August", "maksmaks11q", "Maksim", "Novikov", LocalDate.of(2004, 9, 13));
+		UserEntity newUser = new UserEntity("August1", "maksmaks11q", "Maksim", "Novikov", LocalDate.of(2004, 9, 13));
 		
-		userRepository.save(user);
+		userRepository.save(newUser);
+		UserEntity finddedUser = userRepository.findByUsername("August1");
 		
-		assertNotNull(user);
-		assertNotNull(userEquals);
-		assertEquals(user, userEquals);
+		assertNotNull(finddedUser);
+		assertNotNull(newUser);
 	}
 	
 	@Test
@@ -48,11 +48,14 @@ public class UserRepositoryTest {
 	public void findUserByUsername_shouldFindUserByIdFromDB_ReturnUserById() {
 		userRepository.save(user);
 		
-		UserEntity finddedUser = userRepository.findUserByUsername("August").get();
+		UserEntity finddedUser1 = userRepository.findUserByUsername("August").get();
+		UserEntity finddedUser2 = userRepository.findByUsername("August");
 		
 		assertNotNull(user);
-		assertNotNull(finddedUser);
-		assertEquals(user, finddedUser);
+		assertNotNull(finddedUser1);
+		assertNotNull(finddedUser2);
+		assertEquals(user, finddedUser1);
+		assertEquals(user, finddedUser2);
 	}
 	
 }
