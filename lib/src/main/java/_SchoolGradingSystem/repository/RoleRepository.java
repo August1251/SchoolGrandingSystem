@@ -7,5 +7,7 @@ import _SchoolGradingSystem.entity.RoleEntity;
 
 @Repository
 public interface RoleRepository extends JpaRepository<RoleEntity, Long> {
-
+	
+	RoleEntity findByName(String name);
+	
 }
