@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.when;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -30,6 +31,12 @@ public class RoleRepositoryTest {
 	@Mock
 	private RoleEntity role;
 	
+	@BeforeEach
+	public void setUp() {
+		doCallRealMethod().when(role).setName(ROLE_NAME);
+		role.setName(ROLE_NAME);
+	}
+	
 	@Test
 	@DisplayName("Role Repository Test #1 - Save Role")
 	public void saveRole_shouldSaveRoleOnDB_whenCalledByServer() {
@@ -44,8 +51,6 @@ public class RoleRepositoryTest {
 	@DisplayName("Role Repository Test #2 - Find by name")
 	public void findByName_shouldFindRoleByName_whenExists() {
 		when(role.getName()).thenReturn(ROLE_NAME);
-		doCallRealMethod().when(role).setName(ROLE_NAME);
-		role.setName(ROLE_NAME);
 		
 		roleRepository.save(role);
 		final RoleEntity role1 = roleRepository.findByName(ROLE_NAME);

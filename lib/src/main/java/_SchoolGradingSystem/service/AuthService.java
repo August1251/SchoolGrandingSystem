@@ -23,4 +23,8 @@ public class AuthService {
 		return userRepository.save(user);
 	}
 	
+	public UserEntity findById(long id) {
+		return userRepository.findById(id);
+	}
+	
 }
