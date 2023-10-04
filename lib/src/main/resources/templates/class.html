@@ -5,10 +5,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form th:method="POST" th:action="@{/class/add}"/>
+
+	<form id="class-form" th:method="POST" th:action="@{/class/add}"/>
+	
 	<div th:object="${new_class}">
-		<input type="text" placeholder="Class Name:" th:field="*{studentClass}">
-		<button type="submit">add</button>
+		<input type="text" placeholder="Class Name:" th:field="*{studentClass}" form="class-form">
+		<button type="submit" form="class-form">add</button>
 	</div>
 </body>
 </html>
