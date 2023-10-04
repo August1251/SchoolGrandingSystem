@@ -5,9 +5,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form th:method="POST" th:action="@{/student/add}"/>
-	<div th:object="${student}">
-		<input type="text" placeholder="Student ID" th:field="*{id}">
+	<form th:method="POST" th:action="@{/class/add}"/>
+	<div th:object="${new_class}">
+		<input type="text" placeholder="Class Name:" th:field="*{studentClass}">
 		<button type="submit">add</button>
 	</div>
 </body>
