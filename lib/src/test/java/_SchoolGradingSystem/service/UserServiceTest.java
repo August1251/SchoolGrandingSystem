@@ -25,7 +25,7 @@ import _SchoolGradingSystem.repository.UserRepository;
 @SpringBootTest
 @TestPropertySource("classpath:applicationtest.properties")
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-public class AuthServiceTest {
+public class UserServiceTest {
 	
 	private static final long ID = 1L;
 	private static final String USERNAME = "August";
@@ -38,7 +38,7 @@ public class AuthServiceTest {
 	private UserRepository userRepository;
 	
 	@Autowired
-	private AuthService authService;
+	private UserService userService;
 	
 	@Mock(answer = Answers.RETURNS_DEEP_STUBS)
 	private UserEntity user;
@@ -65,8 +65,8 @@ public class AuthServiceTest {
 	public void saveRegistredUser_saveUserToDB_whenUserEntryiedDatesToForm() {
 		when(user.getId()).thenReturn(ID);
 		
-		authService.saveRegisteredUser(user);
-		final UserEntity find = authService.findById(user.getId());
+		userService.saveUser(user);
+		final UserEntity find = userService.findById(user.getId());
 		
 		assertNotNull(user);
 		assertNotNull(find);
@@ -78,8 +78,8 @@ public class AuthServiceTest {
 	public void findById_findUserByIdFromDB_whenCalledMethodAndAddedIDToParams() {
 		when(user.getId()).thenReturn(ID);
 		
-		authService.saveRegisteredUser(user);
-		UserEntity find1 = authService.findById(ID);
+		userService.saveUser(user);
+		UserEntity find1 = userService.findById(ID);
 		
 		assertNotNull(user);
 		assertEquals(user.getId(), find1.getId());

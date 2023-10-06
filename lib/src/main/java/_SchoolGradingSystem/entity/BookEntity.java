@@ -17,14 +17,11 @@ public class BookEntity {
 	private long id;
 	
 	private String name;
-	
-	private int className;
 
 	public BookEntity() {}
 
-	public BookEntity(String name, int className) {
+	public BookEntity(String name) {
 		this.name = name;
-		this.className = className;
 	}
 
 	public long getId() {
@@ -41,14 +38,6 @@ public class BookEntity {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public int getClassName() {
-		return className;
-	}
-
-	public void setClassName(int className) {
-		this.className = className;
 	}
 	
 }

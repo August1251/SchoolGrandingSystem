@@ -15,11 +15,11 @@ public class SecurityConfig {
 	
 	@Autowired
 	public SecurityConfig(CustomUserDetailsService customUserDetailsService) {
-		this.customUserDetailsService = customUserDetailsService;
+		this.setCustomUserDetailsService(customUserDetailsService);
 	}
 
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
 			.cors((cors) -> cors
 					.disable())
@@ -35,6 +35,14 @@ public class SecurityConfig {
 						.logoutUrl("/logout").permitAll()
 						.logoutSuccessUrl("/login"));
 		return http.build();
+	}
+
+	public CustomUserDetailsService getCustomUserDetailsService() {
+		return customUserDetailsService;
+	}
+
+	public void setCustomUserDetailsService(CustomUserDetailsService customUserDetailsService) {
+		this.customUserDetailsService = customUserDetailsService;
 	}
 	
 }

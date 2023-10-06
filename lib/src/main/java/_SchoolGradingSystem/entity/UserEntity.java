@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -17,36 +18,30 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
 public class UserEntity {
 	
 	@Id
+	@Column(name = "id", unique = true)
 	@SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
 	private long id;
 	
-	@NotEmpty(message = "Username is empty")
-	@Pattern(regexp = "[a-zA-Z0-9]+", message = "Invalid value")
+	@Column(name = "username", unique = true)
 	private String username;
 	
-	@NotEmpty(message = "Password is empty")
-	@Size(min = 8, max = 32, message = "Min size 8 max size 32")
+	@Column(name = "password")
 	private String password;
 	
-	@NotEmpty(message = "First Name is empty")
+	@Column(name = "first_name")
 	private String firstName;
 	
-	@NotEmpty(message = "Surname is empty")
+	@Column(name = "sur_name")
 	private String surname;
 	
-	@NotNull(message = "Birthday dates is empty")
+	@Column(name = "birthday")
 	private LocalDate birthdayDate;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

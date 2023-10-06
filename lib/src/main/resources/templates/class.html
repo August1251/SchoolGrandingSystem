@@ -6,11 +6,38 @@
 </head>
 <body>
 
-	<form id="class-form" th:method="POST" th:action="@{/class/add}"/>
 	
-	<div th:object="${new_class}">
-		<input type="text" placeholder="Class Name:" th:field="*{studentClass}" form="class-form">
-		<button type="submit" form="class-form">add</button>
+	<div>
+	
+		<div th:each="books_iter : ${books}">
+			<div>
+				<p th:text="'ID: ' + ${books_iter.id}">
+				<p th:text="'NAME: ' + ${books_iter.name}">
+			</div>
+		</div>
+		
+		<form th:method="GET" th:action="@{/class/add/book/{bookId}(bookId=${new_class.bookId})}" th:object="${search_book}">
+			<input type="text" th:field="*{bookId}" placeholder="Entry Book ID"><br>
+			<button type="submit">Add Book</button><br>
+		</form>
+		
+		<div th:each="students_iter : ${students}">
+			<div>
+				<p th:text="'ID: ' + ${students_iter.id}">
+				<p th:text="'FIRST NAME: ' + ${students_iter.firstName}">
+				<p th:text="'LAST NAME: ' + ${students_iter.surname}">
+			</div>
+		</div>
+		
+		<form th:method="GET" th:action="@{/class/add/student/{studentId}(studentId=${new_class.studentId})}" th:object="${search_student}">
+			<input type="text" th:field="*{studentId}" placeholder="Entry Student ID"><br>
+			<button type="submit">Add Student</button><br>
+		</form>
+		
+		<form id="class-form" th:method="POST" th:action="@{/class/create}">
+			<input type="text" th:field="${new_class.studentClass}" placeholder="Class Name:"><br>
+			<button type="submit">Add Class</button><br>
+		</form>
 	</div>
 </body>
 </html>

@@ -41,10 +41,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 	private Collection<GrantedAuthority> mapRolesToAuthority(Set<RoleEntity> roles) {
 		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toSet());
 	}
-	
-	@Bean
-	public AuthenticationManager authenticationManager(
-			AuthenticationConfiguration authenticationConfiguration) throws Exception {
+
+    @Bean
+    AuthenticationManager authenticationManager(
+             AuthenticationConfiguration authenticationConfiguration) throws Exception {
 		return authenticationConfiguration.getAuthenticationManager();
 	}
 	

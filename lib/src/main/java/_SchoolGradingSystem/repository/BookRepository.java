@@ -8,4 +8,6 @@ import _SchoolGradingSystem.entity.BookEntity;
 @Repository
 public interface BookRepository extends JpaRepository<BookEntity, Long> {
 
+	BookEntity findById(long id);
+	
 }

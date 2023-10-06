@@ -9,6 +9,7 @@
 plugins {
     // Apply the java-library plugin for API and implementation separation.
     id 'java-library'
+    id 'org.springframework.boot' version '3.1.4'
 }
 
 repositories {
@@ -16,9 +17,42 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+	src {
+		main {
+			java {
+				srcDirs = ["src/main/java/"]
+			}
+		}
+		test {
+			java {
+				srcDirs = ["src/test/java/"]
+			}
+		}
+	}
+}
+
+task farJar(type: Jar) {
+	
+	duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+
+	from {
+		configurations.runtimeClasspath.collect{ it.isDirectory() ? it : zipTree(it) }
+	}
+	manifest {
+		attributes 'Main-Class': '_SchoolGradingSystem.Main'
+	}
+	
+	exclude 'META-INF/*.RSA'
+	exclude 'META-INF/*.SF'
+	exclude 'META-INF/*.DSA'
+		
+	with jar
+
+}
+
 dependencies {
     // Use JUnit Jupiter for testing.
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
 
     // This dependency is exported to consumers, that is to say found on their compile classpath.
     api 'org.apache.commons:commons-math3:3.6.1'
@@ -42,11 +76,12 @@ dependencies {
     
     implementation 'org.springframework.boot:spring-boot-starter-validation:3.1.4'
     
+    implementation 'org.springframework.boot:spring-boot-gradle-plugin:3.1.4'
+    
     testImplementation 'com.h2database:h2:2.2.224'
     
 }
 
-tasks.named('test') {
-    // Use JUnit Platform for unit tests.
+test {
     useJUnitPlatform()
 }

@@ -8,18 +8,18 @@ import _SchoolGradingSystem.repository.RoleRepository;
 import _SchoolGradingSystem.repository.UserRepository;
 
 @Service
-public class AuthService {
+public class UserService {
 
 	private UserRepository userRepository;
 	private RoleRepository roleRepository;
 	
 	@Autowired
-	public AuthService(UserRepository userRepository, RoleRepository roleRepository) {
+	public UserService(UserRepository userRepository, RoleRepository roleRepository) {
 		this.userRepository = userRepository;
 		this.roleRepository = roleRepository;
 	}
 	
-	public UserEntity saveRegisteredUser(UserEntity user) {
+	public UserEntity saveUser(UserEntity user) {
 		return userRepository.save(user);
 	}
 	
